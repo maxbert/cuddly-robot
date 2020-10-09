@@ -3,6 +3,20 @@ import Grid from '@material-ui/core/Grid';
 import dayjs from 'dayjs'
 import { find } from 'lodash'
 import './styles/SubwayCard.css';
+
+// async function callMtaAPI() {
+//     const url = "http://bustime.mta.info/api/siri/stop-monitoring.json?key=895127ba-0b61-4abf-8c51-d7b71ef0590a&version=2&OperatorRef=MTA&MonitoringRef=404197"
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//           this.responseText;
+//         }
+//       };
+//     xhttp.open("GET", url, true);
+//     xhttp.send();
+
+// }
+
+
 function BusCard () {
     const [nextBus, setNextBus] = useState("");
 
