@@ -1,0 +1,12 @@
+.bikeCard {
+    overflow: hidden;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.bikeMap {
+    height: calc(100% + 121px);
+    position: relative;
+    top: -121px;
+    width:100%;
+}
