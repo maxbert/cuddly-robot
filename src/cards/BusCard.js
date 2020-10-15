@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Grid from '@material-ui/core/Grid';
 import dayjs from 'dayjs'
 import { find } from 'lodash'
-import './styles/SubwayCard.css';
+import './styles/BusCard.css';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import ReactFitText from 'react-fittext'
 
 // async function callMtaAPI() {
 //     const url = "http://bustime.mta.info/api/siri/stop-monitoring.json?key=895127ba-0b61-4abf-8c51-d7b71ef0590a&version=2&OperatorRef=MTA&MonitoringRef=404197"
@@ -16,6 +17,7 @@ import './styles/SubwayCard.css';
 
 // }
 
+dayjs.extend(relativeTime)
 
 function BusCard () {
     const [nextBus, setNextBus] = useState("");
@@ -70,6 +72,7 @@ function BusCard () {
     ]
 
     const weekdayX28Schedule = [
+        "01:34",
         "09:34",
         "10:34",
         "11:34",
@@ -97,7 +100,8 @@ function BusCard () {
         "20:49",
         "21:18",
         "22:31",
-        "23:46"
+        "23:46",
+        "23:59"
     ]
 
     const refresh = () => {
@@ -113,7 +117,6 @@ function BusCard () {
             default:
                 nextBusTime = find(weekdayX28Schedule, time => dayjs().format("HH:mm") < time)
         }
-        console.log("next bus time is ", nextBusTime)
         setNextBus(nextBusTime)
     }
     
@@ -124,9 +127,16 @@ function BusCard () {
     //refresh every minute
     setInterval(() => {refresh()}, 60000)
 
+    const getTimeToNextBus = () => {
+        const nextBusTimeObject = dayjs().startOf('day').add(nextBus.split(":")[0], 'hours').add(nextBus.split(":")[1], 'minutes')
+        return dayjs().to(nextBusTimeObject)
+    }
+
     return ( 
-            <div className="subwayTime">
-               The next x28 is at: {nextBus}
+            <div className="busTime">
+                <ReactFitText compressor={0.8}>
+               <h1 className="busSentence">The next x28 will arrive {getTimeToNextBus()}</h1>
+               </ReactFitText>
             </div>
     );
 }

@@ -21,9 +21,10 @@ function BikeCard () {
     }
 
     useEffect(()=> {
-        setMapStorage("edMapStorage_latitude","40.725063622053")
-        setMapStorage("edMapStorage_longitude","-73.98508664020494")
-        setMapStorage("edMapStorage_zoom","15")
+        setMapStorage("edMapStorage_latitude","40.7287750262191")
+        setMapStorage("edMapStorage_longitude","-73.98378775559905")
+        setMapStorage("edMapStorage_filterValues","{\"bike-lanes\":false}")
+        setMapStorage("edMapStorage_zoom","15.5")
         setHasSetMapStorage(true)
     }, [hasSetMapStorage])
 

@@ -1,12 +1,9 @@
-.busCard {
-    overflow: hidden;
-    border: 1px solid black;
-    margin: 10px;
+.busTime {
+    width:25%;
 }
 
-.busTime {
-    height: calc(100% + 121px);
-    position: relative;
-    top: -121px;
-    width:100%;
+.busSentence {
+    font-weight: 300;
+    margin:30px;
+    font-family: 'Montserrat', sans-serif;
 }
