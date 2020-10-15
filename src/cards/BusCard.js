@@ -72,7 +72,6 @@ function BusCard () {
     ]
 
     const weekdayX28Schedule = [
-        "01:34",
         "09:34",
         "10:34",
         "11:34",
