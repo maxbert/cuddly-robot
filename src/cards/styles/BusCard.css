@@ -1,5 +1,7 @@
 .busTime {
     width:25%;
+        z-index: 10;
+        position: relative;
 }
 
 .busSentence {
