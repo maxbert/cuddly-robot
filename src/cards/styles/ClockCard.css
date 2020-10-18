@@ -1,13 +1,10 @@
 .clockCard {
-    width: 50%;
-    margin: auto;
-    margin-top: 0;
 }
 
 .clock {
-    margin: 0;
+    margin: 20px;
     display: flex;
-    justify-content: center;
+    max-width: 500px;
     font-weight: 100;
     font-family: 'Montserrat', sans-serif;
 }

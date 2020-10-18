@@ -8,7 +8,7 @@ function ClockCard () {
             <Grid className="clockCard">
             <ReactFitText compressor={0.35}>
             <h1 className="clock">
-            <Clock format="h:mm" />
+            <Clock format="h:mm" ticking={true}/>
             </h1>
             </ReactFitText>
             </Grid>

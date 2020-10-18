@@ -127,6 +127,9 @@ function BusCard () {
     setInterval(() => {refresh()}, 60000)
 
     const getTimeToNextBus = () => {
+        if(!nextBus) {
+            return "tomorrow"
+        }
         const nextBusTimeObject = dayjs().startOf('day').add(nextBus.split(":")[0], 'hours').add(nextBus.split(":")[1], 'minutes')
         return dayjs().to(nextBusTimeObject)
     }
