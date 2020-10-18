@@ -99,12 +99,10 @@ function BusCard () {
         "20:49",
         "21:18",
         "22:31",
-        "23:46",
-        "23:59"
+        "23:46"
     ]
 
     const refresh = () => {
-        console.log("refresehd")
         let  nextBusTime = "";
         switch(dayjs().day()){
             case 0:
@@ -116,28 +114,26 @@ function BusCard () {
             default:
                 nextBusTime = find(weekdayX28Schedule, time => dayjs().format("HH:mm") < time)
         }
-        setNextBus(nextBusTime)
-    }
-    
-    useEffect(refresh)
-
-
-
-    //refresh every minute
-    setInterval(() => {refresh()}, 60000)
-
-    const getTimeToNextBus = () => {
-        if(!nextBus) {
-            return "tomorrow"
+        let nextBusSentence = ""
+        if(!nextBusTime) {
+            nextBusSentence = "tomorrow"
+        } else {
+            const nextBusTimeObject = dayjs().startOf('day').add(nextBusTime.split(":")[0], 'hours').add(nextBusTime.split(":")[1], 'minutes').add(dayjs().get('second'), 'second')
+            nextBusSentence = dayjs().to(nextBusTimeObject)
         }
-        const nextBusTimeObject = dayjs().startOf('day').add(nextBus.split(":")[0], 'hours').add(nextBus.split(":")[1], 'minutes')
-        return dayjs().to(nextBusTimeObject)
+        setNextBus(nextBusSentence)
     }
+
+    useEffect(() => {
+        refresh()
+        const interval = setInterval(refresh, 1000)
+        return () => clearInterval(interval);
+    }, [])
 
     return ( 
             <div className="busTime">
                 <ReactFitText compressor={0.8}>
-               <h1 className="busSentence">The next x28 will arrive {getTimeToNextBus()}</h1>
+               <h1 className="busSentence">The next x28 will arrive {nextBus}</h1>
                </ReactFitText>
             </div>
     );
