@@ -32,12 +32,13 @@ function BikeCardV2 () {
 
     const colors = ["cfbae1","48cae4","0096c7","023e8a","03045e"]
 
-    const BikeMarker =  styled.div`
+    const HolllowBikeMarker =  styled.div`
             width:10px;
             height:10px;
             ${props => {
                 var cssString = ''
-                cssString += `background-color: #${props.enum < 4 ? colors[props.enum % 4] : colors[4]};`
+                cssString += `border: ${props.num > 2 ? '10px': '5px'} solid #${props.enum < 4 ? colors[props.enum % 4] : colors[4]};`
+                cssString += `background-color: transparent;`
                 cssString += `
                     width:${props.num * 1.5 + 10}px;
                     height:${props.num * 1.5+ 10}px;
@@ -67,6 +68,41 @@ function BikeCardV2 () {
                 return css`animation: ${breathing} ${random(1,10,true)+"s"} linear infinite;`
             }}
         `
+    const BikeMarker =  styled.div`
+        width:10px;
+        height:10px;
+        ${props => {
+            var cssString = ''
+            cssString += `background-color: #${props.enum < 4 ? colors[props.enum % 4] : colors[4]};`
+            cssString += `
+                width:${props.num * 1.5 + 10}px;
+                height:${props.num * 1.5+ 10}px;
+            `
+            if(random(0,1)){
+                cssString += `border-radius: 50%;`
+            }
+            cssString += `animation-delay: ${random(0,10)};`
+            return css`${cssString}`
+         }
+        };
+        ${props => {
+            const stopAnimating = random(20, 80)
+            const breathing = keyframes`
+                0% {
+                    transform: scale(1);
+                }
+                ${stopAnimating / 2}% {
+                    transform: scale(1.5);
+                }
+                ${stopAnimating}% {
+                    transform: scale(1);
+                100% {
+                    transform: scale(1);
+                }
+            `
+            return css`animation: ${breathing} ${random(1,10,true)+"s"} linear infinite;`
+        }}
+    `
     const me = [-73.981530, 40.729280]
 
     return ( 
@@ -89,13 +125,19 @@ function BikeCardV2 () {
                             station.lat <  me[1] + 0.015 &&
                             station.lat > me[1] - 0.015
                             ) {
-                         console.log(station.station_id)
+                         console.log(station.num_docks_available)
                          return <Marker coordinates={[station.lon, station.lat]}>
-                            <BikeMarker 
+                            {stationInfo[index]?.num_docks_available > 2 ? <BikeMarker 
+                            id={station.station_id}
+                            enum={stationInfo[index]?.num_ebikes_available}
+                            num={stationInfo[index]?.num_bikes_available}
+                            /> :
+                            <HolllowBikeMarker 
                             id={station.station_id}
                             enum={stationInfo[index]?.num_ebikes_available}
                             num={stationInfo[index]?.num_bikes_available}
                             />
+                            }
                         </Marker>
                             }
                     }
