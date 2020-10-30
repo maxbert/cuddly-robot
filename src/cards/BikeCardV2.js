@@ -30,6 +30,14 @@ function BikeCardV2 () {
         return () => clearInterval(interval);
     }, [])
 
+    useEffect(() => {
+        const refreshPage = () => {
+            window.location.reload()
+        }
+        const interval = setInterval(refreshPage, 10800000)
+        return () => clearInterval(interval);
+    }, [])
+
     const colors = ["cfbae1","48cae4","0096c7","023e8a","03045e"]
 
     const HolllowBikeMarker =  styled.div`
@@ -37,7 +45,7 @@ function BikeCardV2 () {
             height:10px;
             ${props => {
                 var cssString = ''
-                cssString += `border: ${props.num > 2 ? '10px': '5px'} solid #${props.enum < 4 ? colors[props.enum % 4] : colors[4]};`
+                cssString += `border: ${props.num > 2 ? random(3,10) + 'px': '5px'} solid #${props.enum < 4 ? colors[props.enum % 4] : colors[4]};`
                 cssString += `background-color: transparent;`
                 cssString += `
                     width:${props.num * 1.5 + 10}px;
